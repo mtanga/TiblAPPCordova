@@ -1,0 +1,7 @@
+{
+  "name": "tiblApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
