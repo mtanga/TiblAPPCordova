@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar >
+  <ion-title  *ngIf="message" >{{message.name}}</ion-title> 
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<!--   <img *ngIf="image" [src]="image" with="100">
+
+  <ion-img *ngIf="image" [src]="image"  class="thumbail"></ion-img> -->
+
+
+<div *ngIf="message">
+
+
+  <div class="chat" *ngIf="user.role!='admin'">
+    <div *ngFor="let chat of message.messages">
+      
+      <div *ngIf="chat.Sender==user.uid" class="message me">
+        <div *ngIf="chat.type=='text'">
+          <h4>{{chat.text}}</h4>
+          <p>
+            {{chat.dateCreated.seconds * 1000 | date: 'dd-MM-yyyy HH:mm:ss'}}
+          </p>
+        </div>
+        <div *ngIf="chat.type=='image'" (click)="zoomImage(chat)">
+          <img [src]="chat.image" with="100">
+          <p>
+            {{chat.dateCreated.seconds * 1000 | date: 'dd-MM-yyyy HH:mm:ss'}}
+          </p>
+        </div>
+      </div>
+
+
+
+      <div *ngIf="chat.Sender!=user.uid"  class="message you">
+        <div *ngIf="chat.type=='text'">
+          <h4>{{chat.text}}</h4>
+          <p>
+            {{chat.dateCreated.seconds * 1000 | date: 'dd-MM-yyyy HH:mm:ss'}}
+          </p>
+        </div>
+        <div *ngIf="chat.type=='image'">
+         <!--  <img [src]="chat.url" with="100"> -->
+          <img [src]="chat.image" with="100">
+          <p>
+            {{chat.dateCreated.seconds * 1000 | date: 'dd-MM-yyyy HH:mm:ss'}}
+
+          <!--   {{chat.sender}} || {{user.uid}} -->
+          </p>
+        </div>
+      </div> 
+
+
+
+    </div>
+  </div>
+</div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="secondary">
+    <ion-item>
+     <!--  <ion-icon (click)="sendImage()" class="sends" slot="start"  name="image"></ion-icon> -->
+      <ion-icon (click)="sendImage2()" class="sends" slot="start"  name="image"></ion-icon>
+
+      <ion-label position="floating">Tapez votre message</ion-label>
+      <ion-textarea name="text" [(ngModel)]="text" placeholder="Ecrivez mainteanant votre message ici ..."></ion-textarea>
+    </ion-item>
+    <ion-icon  class="send" (click)="send()" slot="end" name="send-outline"></ion-icon>
+  </ion-toolbar>
+</ion-footer>

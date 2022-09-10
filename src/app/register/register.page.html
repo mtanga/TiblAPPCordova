@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar class="productHeader">
+    <ion-buttons slot="start" color="secondary">
+      <ion-back-button class="white" defaultHref="/tabs/tab1"> </ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end" >
+      <ion-button color="light" (click)="login()">
+        Déjà enregistré ?
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid class="grid1">
+      <ion-row class="row1">
+          <ion-col>
+  
+          </ion-col>
+      </ion-row>
+  
+      <ion-row class="row2">
+          <ion-col>
+  
+          </ion-col>
+      </ion-row>
+  
+  </ion-grid>
+  
+  <ion-slide>
+      <div class="contaier-login">
+          <ion-grid>
+              <ion-row>
+                  <ion-col>
+                      <h1 class="secondary">Inscription</h1>
+                  </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col>
+                      <ion-list>
+  
+                          <ion-item class="round">
+                              <ion-icon color="primary" name="mail-outline" class="icon-login"></ion-icon>
+                              <ion-input name="email"  [(ngModel)]="email" type="email" required placeholder="hello@micheltanga.com"></ion-input>
+                          </ion-item>
+                          <br />
+                          <ion-item class="round"> 
+                            <ion-icon color="primary" name="lock-closed-outline" class="icon-login"></ion-icon> 
+                            <ion-input [type]="passwordType"  name="password"  [(ngModel)]="password"  clearOnEdit="false"></ion-input>
+                            <ion-icon slot="end" [name]="passwordIcon" class="passwordIcon" (click)="hideShowPassword()"></ion-icon>
+                        </ion-item>
+  
+                      </ion-list>
+                  </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col>
+                      <ion-button  (click)="registerWithEmail()"  type="submit" class="button-primary">
+                          Je m'enregistre
+                      </ion-button>
+                  </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col>
+                  <ion-item>
+                    <ion-text text-center color="medium"><h6 no-margin class="small">En créant votre compte vous acceptez les <a (click)="term()">termes d' utilisation</a> et <a (click)="term()">Conditions de confidentialité</a></h6></ion-text>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+     
+          </ion-grid>
+<!--           <ion-grid>
+            <h1 class="secondary">Ou continuez avec </h1>
+            <ion-row>
+                <ion-col>
+                  <img src="../../assets/images/facebook.png" class="social-logo">
+                </ion-col>
+                <ion-col>
+                  <img (click)="authService.GoogleAuth()" src="../../assets/images/google.png" class="social-logo">
+                </ion-col>
+            </ion-row>
+          </ion-grid> -->
+      </div>
+  </ion-slide>
+
+
+
+  
+</ion-content>

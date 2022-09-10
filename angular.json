@@ -32,6 +32,7 @@
             ],
             "styles": [
               "src/theme/variables.scss",
+              "node_modules/ngx-photo-editor/photo-editor.css",
               "src/global.scss"
             ],
             "scripts": [],
@@ -175,7 +176,8 @@
   "cli": {
     "schematicCollections": [
       "@ionic/angular-toolkit"
-    ]
+    ],
+    "analytics": false
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {

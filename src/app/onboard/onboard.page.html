@@ -1,0 +1,53 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-slides pager="true" #slides>
+    <ion-slide class="ion-padding">
+      <img src="../../assets/slide1.png" >
+
+      <div class="slider-text">
+        <h2>vos annonces au bout des doigts</h2>
+
+        <p>
+          Créez vos annonces/offres gratuitement sur Tibl sans engagement.
+        </p>
+      </div>
+
+      <div class="navigator">
+        <ion-button color="primary" fill="clear" (click)="skip()">Passer</ion-button>
+        <ion-button color="primary" fill="clear" (click)="next(slides, 2)">Suivant</ion-button>
+      </div>
+    </ion-slide>
+    <ion-slide class="ion-padding">
+      <img src="../../assets/slide2.png" >
+
+      <div class="slider-text">
+        <h2>Facile à utiliser</h2>
+
+        <p>
+          Tibl vous notifie à chqaue fois que votre annonce est remarquée par un utilisateur
+        </p>
+      </div>
+
+      <div class="navigator">
+        <ion-button color="primary" fill="clear" (click)="skip()">Passer</ion-button>
+        <ion-button color="primary" fill="clear" (click)="next()">Suivant</ion-button>
+      </div>
+    </ion-slide>
+    <ion-slide class="ion-padding">
+      <img src="../../assets/slide3.png" >
+
+      <div class="slider-text">
+        <h2>Connectez vos annonces avec le monde entier</h2>
+
+        <p>
+         Tibl présente gratuitement vos annonces au grand public
+        </p>
+      </div>
+
+      <ion-button color="primary">Démarrer</ion-button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

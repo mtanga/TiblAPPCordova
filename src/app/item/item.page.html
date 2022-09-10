@@ -1,0 +1,118 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-title>{{item.name}}</ion-title>
+    <ion-buttons slot="start" color="secondary">
+      <ion-back-button class="white" defaultHref="/tabs/tab1"> </ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon *ngIf="userInfos.uid==item.userCreated" (click)="editNews()" class="search" color="primary" slot="end"  name="create"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end" *ngIf="userInfos.role=='admin'">
+      <ion-icon *ngIf="item.visible==true" (click)="desactivate(item)" color="primary" slot="end" name="close-circle-outline"></ion-icon>
+      <ion-icon *ngIf="item.visible==false" (click)="activate(item)" color="primary" name="shield-checkmark-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card  class="post-card">
+    <!-- <img *ngIf="item.photoURL" [src]="item.photoURL[0].webviewPath" /> -->
+
+    <ion-slides pager="true" [options]="slideOptsOne" #slideWithNav
+      (ionSlideDidChange)="SlideDidChange(sliderOne,slideWithNav)">
+      <ion-slide *ngFor="let s of item.photoURL">
+      <img (click)="zoomImage(s)" class="card-images" src="{{s}}">
+      </ion-slide>
+    </ion-slides>
+
+    <ion-card-header>
+    <!--   <ion-card-title class="titre" >{{item.name}}</ion-card-title>  -->   
+    </ion-card-header>
+    <ion-card-content>
+      <p> {{item.description}}</p>
+      <small>
+        <span class="petit">{{item.lieu}}</span>
+      </small>
+    </ion-card-content>
+  </ion-card> 
+
+
+  <ion-item  class="itemi" >
+
+    <ion-label class="read-more-label ico">
+      <ion-badge class="petit" color="light" slot="end">{{item.price}} Fcfa</ion-badge>
+    </ion-label>
+
+    <ion-label class="read-more-label ico" >
+      <ion-icon name="bookmark"></ion-icon>
+      <ion-badge   *ngIf="dejass==false" (click)="follower(item.userCreated)" class="petit" color="light" slot="end">S'abonner</ion-badge>
+      <ion-badge   *ngIf="dejass==true" (click)="disFollower(item.userCreated)"  class="petit" style="font-size: .5rem;" color="light" slot="end">Se désabonner</ion-badge>
+    </ion-label>
+
+    <ion-label *ngIf="userInfos.uid!=item.userCreated" (click)="signaler(item)" class="read-more-label ico">
+      <ion-icon name="alert-circle-outline"></ion-icon>
+      <ion-badge  class="petit" color="light" slot="end">Signaler</ion-badge>
+    </ion-label>
+  </ion-item>
+
+
+  <ion-item  class="itemi">
+
+    <ion-label (click)="message(item)" class="read-more-label ico" *ngIf="userInfos.uid!=item.userCreated">
+      <ion-icon name="chatbubble-ellipses"></ion-icon>
+      <ion-badge  class="petit" color="light" slot="end">Message</ion-badge>
+    </ion-label>
+
+    <ion-label (click)="call(item.userCreated)" class="read-more-label ico">
+      <ion-icon name="call"></ion-icon>
+      <ion-badge class="petit" color="light" slot="end">Appeler</ion-badge>
+    </ion-label>
+
+    <ion-label class="read-more-label ico">
+      <ion-chip (click)="userItem(item.userCreated)" class="light">
+        <ion-avatar>
+          <img  *ngIf="item.userImage" [src]="item.userImage || '/assets/images/avatar.png'" />
+        </ion-avatar>
+        <ion-label>{{item.userName || "User"}}</ion-label>
+      </ion-chip>
+    </ion-label>
+
+  </ion-item>
+
+
+
+  <form class="padding">
+    <ion-list>
+      <ion-label>Votre commentaire </ion-label>
+      <ion-item class="round">
+        <ion-textarea [(ngModel)]="comment" name="comment"  ></ion-textarea>
+        <ion-button (click)="commentOn()" clear slot="end">Publier</ion-button>
+      </ion-item>
+    </ion-list>
+  </form>
+
+<div  *ngFor="let items of item.comments; let i = index" class="comments">
+  <p class="para comm" >{{items.item}}</p>
+  <ion-item class="para">
+    <ion-chip class="light">
+      <ion-avatar>
+        <img (click)="zoomImage(items.photoURL)" *ngIf="items.photoURL" [src]="items.photoURL" />
+      </ion-avatar>
+      <ion-label>{{items.userName}}</ion-label>
+    </ion-chip>
+    <ion-icon  *ngIf="userInfos.uid==items.user"  (click)="updateTheComment(items, i)" color="primary" slot="end" name="create"></ion-icon>
+    <ion-icon  *ngIf="userInfos.uid==items.user" (click)="deleteTheComment(items, i)" color="primary" slot="end" name="close-circle-outline"></ion-icon>
+  </ion-item>
+
+</div>
+
+
+
+
+
+
+
+
+</ion-content>
+

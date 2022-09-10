@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-title>Nouvel article</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Mon image ici -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let photo of photoService.photos; index as position">
+        <ion-img [src]="photo.webviewPath"  class="thumbail"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+  <form class="padding">
+    <ion-list>
+      <ion-item class="round">
+        <ion-input position="floating" name="title"  [(ngModel)]="new.name" type="name" required placeholder="titre de votre actualité"></ion-input>
+    </ion-item>
+<br/>
+    <!-- Textarea in an item with a floating label -->
+    <ion-item class="round">
+      <ion-label position="floating">Décrivez votre actualité</ion-label>
+      <ion-textarea name="text"  [(ngModel)]="new.description"></ion-textarea>
+    </ion-item>
+
+
+    <ion-item class="photo" lines="none">
+      <ion-badge (click)="addPhotoToGallery()" slot="start"><ion-icon name="camera-outline"></ion-icon></ion-badge>
+      <ion-label>Chisir une photo</ion-label>
+    </ion-item>
+
+
+    <ion-row>
+      <ion-col>
+          <ion-button  (click)="create()"  type="submit" class="btn_full button-primary">
+              Publier
+          </ion-button>
+      </ion-col>
+  </ion-row>
+    </ion-list>
+  </form>
+</ion-content>

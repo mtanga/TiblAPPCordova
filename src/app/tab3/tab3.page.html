@@ -1,17 +1,191 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+
+
+<ion-content fullscreen="true" slot="fixed" >
+
+<!--   <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]=""
+    format="png"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady()"
+    (loadImageFailed)="loadImageFailed()"
+></image-cropper> -->
+
+
+  <ion-header style="background-color: #746169!important;">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-buttons slot="end">
+        <ion-icon (click)="takePic()" class="camera" color="light" slot="end" name="camera-outline"></ion-icon>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
+  
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <div class="card" style="padding-top:25px;">
+    <div class="header">
+      <div class="avatar">
+        <!-- <img [src]="user.picture" alt=""> -->
+        <img (click)="zoomImage(userinfos.photoURL)" class="profil-image align-self-start mr-5 img-thumbnail rounded-circle" src="{{(userinfos?.photoURL) ? userinfos?.photoURL : '/assets/images/avatar.png'}}"
+                alt="{{user.displayName}}"> 
+                
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="user-meta ion-text-center">
+        <ion-badge (click)="authService.SignOut()"  style="    background-color: #43383c;
+        color: white;
+        border-radius: 10px;
+        padding: 10px;">
+          <ion-icon color="danger" slot="start" name="log-out-outline"></ion-icon>
+          Déconnexion
+        </ion-badge>
+
+        <ion-badge (click)="authService.SignOut()"  style="    background-color:#25691c;
+        color: white;
+        border-radius: 10px;
+        padding: 10px; font-size: .7rem;margin:3px;">
+        
+        <span *ngIf="user?.role=='agent'">
+        <ion-icon  color="secondary" slot="start" name="people-outline"></ion-icon>
+          {{allFollowers?.length}} abonnés
+        </span>
+        </ion-badge>
+        
+        <h3 class="playername">{{(user.displayName) ? user.displayName : 'User'}}
+            <ion-badge>
+              <ion-icon *ngIf="userinfos?.status==true" name="shield-checkmark"></ion-icon>
+              <ion-icon *ngIf="userinfos?.status==false" name="close-circle"></ion-icon>
+            </ion-badge>
+          </h3>
+        <h5 class="email">{{user.email}}</h5>
+        <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
+      </div>
+    </div>
+  </div>
+
+
+  <br/><br/>
+  <ion-list class="padding">
+
+    <ion-item (click)="profile()">
+      <ion-icon color="primary" slot="start" name="person-circle-outline"></ion-icon>
+      <ion-label>
+        Modifier mon profil
+      </ion-label>
+      <ion-icon color="primary" slot="end" name="chevron-forward"></ion-icon>
+    </ion-item>
+
+
+    <ion-item (click)="editPasswordPrompt()">
+      <ion-icon color="primary" slot="start" name="lock-closed"></ion-icon>
+      <ion-label>
+        Modifier mon mot de passe
+      </ion-label>
+      <ion-icon color="primary" slot="end" name="chevron-forward"></ion-icon>
+    </ion-item>
+
+    <ion-item (click)="userItem()" *ngIf="userinfos?.role=='agent'">
+      <ion-icon color="primary" slot="start" name="home"></ion-icon>
+      <ion-label>
+        Mes offres
+      </ion-label>
+      <ion-icon color="primary" slot="end" name="chevron-forward"></ion-icon>
+    </ion-item> 
+
+    <ion-item (click)="offres()" *ngIf="userinfos?.role=='admin'" >
+      <ion-icon color="primary" slot="start" name="home"></ion-icon>
+      <ion-label>
+        Consulter les offres
+      </ion-label>
+      <ion-icon color="primary" slot="end" name="chevron-forward"></ion-icon>
+    </ion-item> 
+
+
+    <ion-item (click)="followers()" *ngIf="userinfos?.role!='admin'" >
+      <ion-icon color="primary" slot="start" name="bookmark"></ion-icon>
+      <ion-label>
+        Mes abonnements
+      </ion-label>
+      <ion-icon color="primary" slot="end" name="chevron-forward"></ion-icon>
+    </ion-item> 
+
+
+    <ion-item (click)="users()" *ngIf="userinfos?.role=='admin'">
+      <ion-icon color="primary" slot="start" name="people-circle"></ion-icon>
+      <ion-label>
+        Utilisateurs
+      </ion-label>
+      <ion-icon color="primary" slot="end" name="chevron-forward"></ion-icon>
+    </ion-item> 
+
+
+
+
+
+
+    
+
+    <ion-item (click)="chat()" *ngIf="userinfos?.role!='admin'">
+      <ion-icon color="primary" slot="start" name="chatbubbles"></ion-icon>
+      <ion-label>
+        Messages
+      </ion-label>
+     <!--  <ion-badge slot="end">22</ion-badge> -->
+      <ion-icon color="primary" slot="end" name="chevron-forward"></ion-icon>
+    </ion-item>
+
+
+<!--     <ion-item (click)="paiements()">
+      <ion-icon color="dark" slot="start" name="card-outline"></ion-icon>
+      <ion-label>
+       Signalements
+      </ion-label>
+      <ion-icon color="dark" slot="end" name="chevron-forward-circle"></ion-icon>
+    </ion-item> -->
+<!-- -->
+
+
+
+
+    <ion-item (click)="notification()" *ngIf="userinfos?.role!='client'">
+      <ion-icon color="primary" slot="start" name="notifications-circle"></ion-icon>
+      <ion-label>
+        Notifications
+      </ion-label>
+     <!--  <ion-badge slot="end">22</ion-badge> -->
+      <ion-icon color="primary" slot="end" name="chevron-forward"></ion-icon>
+    </ion-item> 
+
+<!-- -->
+ <!--    <ion-item (click)="langue()">
+      <ion-icon color="dark" slot="start" name="flag-outline"></ion-icon>
+      <ion-label>
+        langue
+      </ion-label>
+      <ion-icon color="dark" slot="end" name="chevron-forward-circle"></ion-icon>
+    </ion-item> -->
+
+    <ion-item (click)="serviceClient()" *ngIf="userinfos?.role!='admin'">
+      <ion-icon  color="primary" slot="start" name="help-circle"></ion-icon>
+      <ion-label>
+        Service client
+      </ion-label>
+<!--       <ion-icon color="primary" slot="end" name="chevron-forward"></ion-icon> -->
+    </ion-item>
+
+<!--     <ion-item (click)="noter()" lines="none" *ngIf="userinfos?.role!='admin'">
+      <ion-icon color="primary" slot="start"  name="alert-circle"></ion-icon>
+      <ion-label>
+        Noter l'application
+      </ion-label>
+    </ion-item> -->
+
+<!--       <div>
+        <h3>Espace gestion</h3>
+      </div> -->
+
+  </ion-list>
 </ion-content>

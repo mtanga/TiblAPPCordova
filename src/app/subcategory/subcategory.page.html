@@ -1,0 +1,108 @@
+<ion-header style="background-color: red!important;">
+  <ion-toolbar>
+    <ion-title *ngIf="subCategories">
+      {{subCategories.name}}
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon (click)="search()" class="search" color="primary" slot="end"  name="search"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+ <!--  <img [src]="subCategories.image"  class="banner"/> -->
+
+
+    <!-- fab placed to the top end -->
+    <ion-fab (click)="create()" vertical="bottom" horizontal="end" slot="fixed" *ngIf="user?.status==true && user?.role=='agent'">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+
+
+   
+  <ion-card  *ngFor="let item of offers; let i = index" class="post-card">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img *ngIf="item.userImage" [src]="item.userImage" (click)="zoomImage(item.userImage)"/>
+      </ion-avatar>
+      <ion-label (click)="userItem(item.userCreated)">
+        <h3>{{item.userName || "User"}}</h3>
+        <p>{{item.dateCreated.seconds * 1000 | date: 'dd-MM-yyyy HH:mm:ss'}}</p>
+      </ion-label>
+    </ion-item>
+
+
+    <img *ngIf="item.photoURL[0]" class="card-image" [src]="item.photoURL[0]" (click)="zoomImage(item.photoURL[0])"/>
+    <ion-card-header>
+      <ion-card-title class="titre" >{{item.name}}</ion-card-title>
+      
+    </ion-card-header>
+    <ion-card-content>
+      <p> {{shorten(item.description, 100)}}</p>
+    </ion-card-content>
+
+    <ion-item  class="itemi">
+
+      <ion-label class="read-more-label ico">
+        <ion-badge class="petit" color="light" slot="end">{{item.price}}</ion-badge>
+        <span class="petit">F CFA</span>
+      </ion-label>
+
+      <ion-label class="read-more-label ico">
+        <span class="petit">{{item.lieu}}</span>
+      </ion-label>
+
+    </ion-item>
+
+
+    <ion-item  class="itemi">
+
+      <ion-label class="read-more-label ico">
+        <ion-badge class="petit" color="light" slot="end">{{item.likes.length}}</ion-badge>
+        <span class="petit">j'aime</span>
+      </ion-label>
+
+      <ion-label class="read-more-label ico">
+        <ion-badge class="petit" color="light" slot="end">{{item.comments.length}}</ion-badge>
+        <span class="petit">commentaires</span>
+      </ion-label>
+
+      <ion-label class="read-more-label ico">
+        <ion-badge class="petit" color="light" slot="end">{{item.shares}}</ion-badge>
+       <span class="petit">partages</span>
+      </ion-label>
+
+    </ion-item>
+
+
+
+    <ion-item class="ion-activated" detail lines="none" >
+      <ion-label class="read-more-label ico">
+        <ion-icon *ngIf="checkUser(item.likes).trouve" (click)="like(item)" color="secondary" name="heart-circle-outline"></ion-icon>
+        <ion-icon  *ngIf="!checkUser(item.likes).trouve" (click)="like(item)" color="primary" name="heart-circle-outline"></ion-icon>
+      </ion-label>
+
+      <ion-label class="read-more-label ico">
+        <ion-icon  (click)="newsitem(item, i)" color="primary" name="chatbox-ellipses-outline"></ion-icon>
+      </ion-label>
+
+      <ion-label class="read-more-label ico">
+        <ion-icon (click)="share(item)" color="primary" name="arrow-redo-outline"></ion-icon>
+      </ion-label>
+
+      <ion-label (click)="newsitem(item, i)" class="read-more read-more-label ico">
+       Afficher
+      </ion-label>
+
+    </ion-item>
+  </ion-card>
+
+
+</ion-content>

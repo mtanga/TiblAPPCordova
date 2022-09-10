@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-title>Nouvelle offre</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Mon image ici -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let photo of photoService.photos; index as position">
+        <ion-img [src]="photo.webviewPath"  class="thumbail"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+  <form class="padding">
+    <ion-list>
+      <ion-item class="round">
+        <ion-input position="floating" name="title"  [(ngModel)]="offer.name" type="name" required placeholder="Titre de votre offre"></ion-input>
+    </ion-item>
+<br/>
+
+<ion-item class="round">
+  <ion-input position="floating" name="lieu"  [(ngModel)]="offer.lieu" type="name" required placeholder="Lieu"></ion-input>
+</ion-item>
+
+
+<ion-item class="round">
+  <ion-input position="floating" name="price"  [(ngModel)]="offer.price" type="number" required placeholder="Prix"></ion-input>
+</ion-item>
+
+
+<ion-item class="round">
+  <ion-label position="floating">Sélectionnez un type</ion-label>
+  <ion-select name="category"  [(ngModel)]="offer.category" placeholder="Sélectionnez un type" (ionChange)="triggerEvent()">
+    <ion-select-option value="{{item.id}}" *ngFor="let item of categories.category">{{item.name}}</ion-select-option>
+  </ion-select>
+</ion-item>
+
+
+<ion-item class="round">
+  <ion-label position="floating">Sélectionnez une catégorie</ion-label>
+  <ion-select name="subcategory"   [(ngModel)]="offer.subcategory" placeholder="Sélectionnez une catégorie">
+    <ion-select-option value="{{item.id}}" *ngFor="let item of sub">{{item.name}}</ion-select-option>
+  </ion-select>
+</ion-item>
+
+
+    <!-- Textarea in an item with a floating label -->
+    <ion-item class="round">
+      <ion-label position="floating">Décrivez votre offre</ion-label>
+      <ion-textarea name="text"  [(ngModel)]="offer.description"></ion-textarea>
+    </ion-item>
+
+
+
+
+    <ion-item class="photo" lines="none">
+      <ion-badge (click)="addPhotoToGallery()" slot="start"><ion-icon name="camera-outline"></ion-icon></ion-badge>
+      <ion-label>Chisir une photo</ion-label>
+    </ion-item>
+
+
+    <ion-row>
+      <ion-col>
+          <ion-button  (click)="create()"  type="submit" class="btn_full button-primary">
+              Publier
+          </ion-button>
+      </ion-col>
+  </ion-row>
+    </ion-list>
+  </form>
+</ion-content>

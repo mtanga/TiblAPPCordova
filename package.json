@@ -15,13 +15,26 @@
   "dependencies": {
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.0",
+    "@angular/fire": "^7.4.1",
     "@angular/forms": "^14.0.0",
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "@awesome-cordova-plugins/call-number": "^5.45.0",
+    "@awesome-cordova-plugins/camera": "^5.45.0",
+    "@awesome-cordova-plugins/image-picker": "^5.45.0",
+    "@awesome-cordova-plugins/photo-viewer": "^5.45.0",
+    "@awesome-cordova-plugins/social-sharing": "^5.45.0",
+    "@awesome-cordova-plugins/splash-screen": "^5.45.0",
+    "@ionic-native/core": "^5.36.0",
+    "@ionic-native/crop": "^5.36.0",
+    "@ionic-native/image-picker": "^5.36.0",
     "@ionic/angular": "^6.1.9",
     "@ionic/cordova-builders": "^7.0.0",
+    "firebase": "^9.9.4",
     "ionicons": "^6.0.3",
+    "ngx-ionic-image-viewer": "^0.7.5",
+    "ngx-photo-editor": "^0.4.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
@@ -42,6 +55,18 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
+    "call-number": "^1.0.1",
+    "cordova-android": "^11.0.0",
+    "cordova-browser": "^6.0.0",
+    "cordova-plugin-camera": "^6.0.0",
+    "cordova-plugin-crop": "^0.4.0",
+    "cordova-plugin-device": "2.0.2",
+    "cordova-plugin-ionic-keyboard": "^2.0.5",
+    "cordova-plugin-ionic-webview": "^5.0.0",
+    "cordova-plugin-splashscreen": "5.0.2",
+    "cordova-plugin-statusbar": "2.4.2",
+    "cordova-plugin-x-socialsharing": "^6.0.3",
+    "es6-promise-plugin": "^4.2.2",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
@@ -54,9 +79,30 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "mx.ferreyra.callnumber": "^0.0.2",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "typescript": "~4.7.3"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-x-socialsharing": {},
+      "mx.ferreyra.callnumber": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-keyboard": {},
+      "call-number": {},
+      "cordova-plugin-camera": {
+        "ANDROIDX_CORE_VERSION": "1.6.+"
+      },
+      "cordova-plugin-crop": {}
+    },
+    "platforms": [
+      "browser",
+      "android"
+    ]
+  }
 }

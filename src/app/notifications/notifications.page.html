@@ -1,0 +1,38 @@
+<ion-header style="background-color: red!important;">
+  <ion-toolbar>
+    <ion-title>
+      Notifications
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <div *ngFor="let item of notications; let i = index">
+
+      <div class="new" *ngIf="user?.role=='admin'">
+          <ion-label class="label-title">{{item.type}}</ion-label>
+         <!--  <ion-label slot="end" class="label-date">Lun 19-02-21</ion-label> -->
+       
+        <p class="padder">
+          {{item.descritpion}}<!--  <span class="pan">XXXXXX</span> -->
+        </p>
+        <ion-label class="label-titles" (click)="offer(item.item)">Consulter l'offre</ion-label>
+      </div>
+
+
+      <div class="new" *ngIf="user?.role=='agent'">
+          <ion-label class="label-title">{{item.titre}}</ion-label>
+         <!--  <ion-label slot="end" class="label-date">Lun 19-02-21</ion-label> -->
+        <p class="padder">
+          {{item.descritpion}}<!--  <span class="pan">XXXXXX</span> -->
+        </p>
+      </div>
+
+
+    </div>
+  </ion-list>
+</ion-content>

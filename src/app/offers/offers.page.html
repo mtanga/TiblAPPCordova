@@ -1,0 +1,41 @@
+<ion-header style="background-color: red!important;">
+  <ion-toolbar>
+    <ion-title>
+      Toutes les offres
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-searchbar placeholder="Rechercher ..." [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}"  (keyup)="filterList($event)"></ion-searchbar>
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+
+        <ion-card  *ngFor="let item of offers; let i = index" class="post-card" (click)="newsitem(item, i)">
+
+          <img *ngIf="item.photoURL[0]" [src]="item.photoURL[0]" />
+          <ion-card-header>
+            <ion-card-title class="titre" >{{item.name}}</ion-card-title>
+            
+          </ion-card-header>
+          <ion-card-content>
+            <ion-icon *ngIf="item.visible==true" color="primary" name="shield-checkmark-outline"></ion-icon>
+            <ion-icon  *ngIf="item.visible==false" color="primary" name="close-circle-outline"></ion-icon>
+          </ion-card-content>
+
+        </ion-card>
+
+      </ion-col>
+      
+    </ion-row>
+    </ion-grid>  
+
+</ion-content>
+
