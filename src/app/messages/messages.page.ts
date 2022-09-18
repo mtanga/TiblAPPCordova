@@ -12,6 +12,7 @@ import { NotificationService } from '../shared/services/data/notification.servic
 import { Offer } from '../shared/services/models/offer';
 import { LoadingService } from '../shared/services/utils/loading.service';
 import {  PhotoService } from '../shared/utils/photo.service';
+import { Console } from 'console';
 
 
 @Component({
@@ -98,23 +99,62 @@ export class MessagesPage implements OnInit {
 
 
 
-sendImage2() {
-const options: CameraOptions = {
-    quality: 100,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,
-    sourceType : this.camera.PictureSourceType.PHOTOLIBRARY
+async sendImage2() {
+  if(this.message ==undefined || this.message.messages.lenght < 3){
+    console.log("CGU");
+      let alert = await this.alertController.create({
+        message: '<ion-text text-center color="medium"><h6 no-margin class="small">En envoyant votre message vous acceptez les <a (click)="term()">termes d\' utilisation</a> et <a (click)="term()">Conditions de confidentialité</a></h6></ion-text>',
+        buttons: [
+          {
+            text: 'Je refuse',
+            role: 'cancel',
+            handler: () => {
+              this.presentToast("Message non envoyé!");
+            }
+          },
+          {
+            text: 'J\'accepte',
+            handler: () => {
+              const options: CameraOptions = {
+                quality: 100,
+                destinationType: this.camera.DestinationType.DATA_URL,
+                encodingType: this.camera.EncodingType.JPEG,
+                mediaType: this.camera.MediaType.PICTURE,
+                sourceType : this.camera.PictureSourceType.PHOTOLIBRARY
+              }
+              
+              this.camera.getPicture(options).then((imageData) => {
+               // imageData is either a base64 encoded string or a file URI
+               // If it's base64 (DATA_URL):
+                let base64Image = 'data:image/jpeg;base64,' + imageData;
+                 this.updateImg(base64Image);
+              }, (err) => {
+               // Handle error
+              });
+            }
+          }
+        ]
+      });
+      alert.present();
   }
-  
-  this.camera.getPicture(options).then((imageData) => {
-   // imageData is either a base64 encoded string or a file URI
-   // If it's base64 (DATA_URL):
-    let base64Image = 'data:image/jpeg;base64,' + imageData;
-     this.updateImg(base64Image);
-  }, (err) => {
-   // Handle error
-  });
+  else{
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType : this.camera.PictureSourceType.PHOTOLIBRARY
+    }
+    
+    this.camera.getPicture(options).then((imageData) => {
+     // imageData is either a base64 encoded string or a file URI
+     // If it's base64 (DATA_URL):
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+       this.updateImg(base64Image);
+    }, (err) => {
+     // Handle error
+    });
+  }
 }
 
 updateImg(img){
@@ -170,28 +210,70 @@ async  base64FromPath(path: string): Promise<string> {
 
 
 
-  send(){
+  async send(){
     console.log("Votre message", this.text)
-    if(this.text == "" || this.text.length <2){
+    if(this.text == "" || this.text==undefined || this.text==null || this.text.length <2 ){
       this.presentToast("Impossible d'envoyer votre message car il est vide ou trop petit");
     }
     else{
-      console.log(this.text)
-      let data = {
-        type : "text",
-        text : this.text,
-        Sender : this.user.uid,
-        dateCreated : new Date()
+     console.log("longueur", this.message?.message.length)
+      if(this.message ==undefined || this.message.messages.lenght < 3){
+        console.log("CGU");
+          let alert = await this.alertController.create({
+            message: '<ion-text text-center color="medium"><h6 no-margin class="small">En envoyant votre message vous acceptez les <a (click)="term()">termes d\' utilisation</a> et <a (click)="term()">Conditions de confidentialité</a></h6></ion-text>',
+            buttons: [
+              {
+                text: 'Je refuse',
+                role: 'cancel',
+                handler: () => {
+                  this.presentToast("Message non envoyé!");
+                }
+              },
+              {
+                text: 'J\'accepte',
+                handler: () => {
+                  console.log(this.text)
+                  let data = {
+                    type : "text",
+                    text : this.text,
+                    Sender : this.user.uid,
+                    dateCreated : new Date()
+                  }
+                  this.messageService.sendMessage(this.id, data)
+                  .then(() => {
+                    this.text = "";
+                    this.retrieveMessage(this.id);
+                  })
+                  .catch(err => console.log(err));
+                }
+              }
+            ]
+          });
+          alert.present();
       }
-      this.messageService.sendMessage(this.id, data)
-      .then(() => {
-        this.text = "";
-        this.retrieveMessage(this.id);
-      })
-      .catch(err => console.log(err));
+      else{
+        console.log(this.text)
+        let data = {
+          type : "text",
+          text : this.text,
+          Sender : this.user.uid,
+          dateCreated : new Date()
+        }
+        this.messageService.sendMessage(this.id, data)
+        .then(() => {
+          this.text = "";
+          this.retrieveMessage(this.id);
+        })
+        .catch(err => console.log(err));
+      }
     }
 
   }
+
+  term(){
+    //window.open('https://newtec-ing.com/politique-de-confoidentialite/','popup','width=600,height=600');
+    window.open('https://newtec-ing.com/politique-de-confoidentialite/', 'location=yes, toolbar=yes');
+   }
 
 
   async presentToast(text) {

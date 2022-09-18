@@ -24,6 +24,11 @@ export class ChoosePage implements OnInit {
 
   }
 
+  term(){
+    //window.open('https://newtec-ing.com/politique-de-confoidentialite/','popup','width=600,height=600');
+    window.open('https://newtec-ing.com/politique-de-confoidentialite/', 'location=yes, toolbar=yes');
+   }
+
 continue(){
   if(localStorage.getItem('role')==null){
     this.presentToast('Veuillez spécifier votre rôle pour continuer.')

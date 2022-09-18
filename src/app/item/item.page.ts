@@ -248,11 +248,16 @@ export class ItemPage implements OnInit {
   }
 
 
+  term(){
+    //window.open('https://newtec-ing.com/politique-de-confoidentialite/','popup','width=600,height=600');
+    window.open('https://newtec-ing.com/politique-de-confoidentialite/', 'location=yes, toolbar=yes');
+   }
+
   signaler(item){
     this.alertController.create({
-      header: 'Signaler une offre',
+      header: 'Souhaitez-vous signaler cette offre ?',
      // subHeader: 'Beware lets confirm',
-      message: 'Souhaitez-vous signaler cette offre ?',
+      message: '<ion-text text-center color="medium"><h6 no-margin class="small">En signalant vous acceptez les <a (click)="term()">termes d\' utilisation</a> et <a (click)="term()">Conditions de confidentialité</a></h6></ion-text>',
       inputs: [
         {
           name: "raison",

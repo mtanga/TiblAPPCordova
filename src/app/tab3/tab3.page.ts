@@ -157,21 +157,28 @@ export class Tab3Page implements OnInit {
           console.log('Delete clicked');
         }
       }, {
-        text: 'contact@tibl.cm',
+        text: 'tiblapps@gmail.com',
         icon: 'mail',
         handler: () => {
           console.log('Share clicked');
         }
       },{
-        text: 'https://www.tibl.cm',
+        text: 'CGU',
         icon: 'globe',
         handler: () => {
-          console.log('Favorite clicked');
+          window.open('https://newtec-ing.com/politique-de-confoidentialite/', 'location=yes, toolbar=yes');
         }
       }]
     });
     await actionSheet.present();
   }
+
+
+
+  term(){
+    //window.open('https://newtec-ing.com/politique-de-confoidentialite/','popup','width=600,height=600');
+    window.open('https://newtec-ing.com/politique-de-confoidentialite/', 'location=yes, toolbar=yes');
+   }
 
   async noter() {
     const actionSheet = await this.alertController.create({

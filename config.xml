@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.tibl.app.cm.com" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.tibl.app.cm.com" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Tibl</name>
     <description>Application de gestion immobilière.</description>
     <author email="hello@micheltanga.com" href="micheltanga.com">Michel TANGA</author>
@@ -22,6 +22,8 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="loadUrlTimeoutValue" value="700000" />
     <preference name="SplashScreenDelay" value="3000" />
+    <preference name="InAppBrowserStatusBarStyle" value="lightcontent" />
+    <preference name="PreferredContentMode" value="mobile" />
     <platform name="android">
         <preference name="Scheme" value="http" />
         <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/screen/android/splashscreen.xml" />

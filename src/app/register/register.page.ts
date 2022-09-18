@@ -22,7 +22,8 @@ export class RegisterPage implements OnInit {
   }
 
   term(){
-    window.open("https://newtec-ing.com/politique-de-confoidentialite/", "_parent");
+   // window.open("https://newtec-ing.com/politique-de-confoidentialite/", "_parent");
+    window.open('https://newtec-ing.com/politique-de-confoidentialite/','popup','width=600,height=600');
   }
 
   registerWithEmail(){

@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ImagePicker } from '@awesome-cordova-plugins/image-picker/ngx';
-
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 // Firebase services + environment module
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -48,6 +48,7 @@ import { NgxIonicImageViewerModule } from 'ngx-ionic-image-viewer';
     SocialSharing,
     SplashScreen,
     CallNumber,
+    InAppBrowser,
     Camera,
     Crop,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
