@@ -21,7 +21,10 @@
 
     <ion-slides pager="true" [options]="slideOptsOne" #slideWithNav
       (ionSlideDidChange)="SlideDidChange(sliderOne,slideWithNav)">
-      <ion-slide *ngFor="let s of item.photoURL">
+      <ion-slide *ngFor="item.photoURL!=''">
+        <img (click)="zoomImage(item.photoURL)" class="card-images" src="{{item.photoURL}}">
+        </ion-slide>
+      <ion-slide *ngFor="let s of item.images">
       <img (click)="zoomImage(s)" class="card-images" src="{{s}}">
       </ion-slide>
     </ion-slides>

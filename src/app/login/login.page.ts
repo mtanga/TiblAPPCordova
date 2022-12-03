@@ -28,21 +28,7 @@ export class LoginPage implements OnInit {
     this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
 }
 
-term(){
 
-  //window.open('https://newtec-ing.com/politique-de-confoidentialite/','popup','width=600,height=600');
-  window.open('https://newtec-ing.com/politique-de-confoidentialite/', 'location=yes, toolbar=yes');
-/*   const browser = this.iab.create('https://newtec-ing.com/politique-de-confoidentialite/');
-
-    //browser.executeScript(...);
-
-    browser.insertCSS({code:"body{background-color:white;}"});
-    browser.on('loadstop').subscribe(event => {
-      browser.insertCSS({ code: "body{color: red;" });
-    });
-
-    browser.close() */;
- }
 
 register(){
   this.router.navigate(['/choose']);

@@ -7,7 +7,7 @@ export class Offer {
     lieu : string;
     price : number;
     photoURL: any;
-    images: any;
+    images: any = [];
     likes : any;
     comments : any;
     shares : number;

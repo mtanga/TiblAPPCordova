@@ -37,7 +37,7 @@ export class ProfileService {
   }
 
   
-  getAll(): AngularFirestoreCollection<Offer> {
+  getAll(): AngularFirestoreCollection<any> {
     return this.Ref;
   }
 

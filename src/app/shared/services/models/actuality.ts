@@ -1,7 +1,8 @@
 export class Actuality {
     uid?: string;
     name?: string;
-    photoURL?: any[];
+    images?: any = [];
+    photoURL?: any;
     vip?: string;
     description?: string;
     dateCreated?: Date;

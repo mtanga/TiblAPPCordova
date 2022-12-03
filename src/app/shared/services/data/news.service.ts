@@ -47,7 +47,6 @@ export class NewsService {
      news.dateCreated = new Date();
      news.userCreated = JSON.parse(localStorage.getItem('user')!).uid;
      news.comments = [];
-     news.photoURL = [];
      news.likes =  [];
      news.share = 0
      return this.Ref.add({ ...news });

@@ -75,6 +75,7 @@ export class Tab1Page {
 
   retrieveNews(): void {
     this.ionLoader.hideLoader();
+    
     this.offerService.getAll().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>

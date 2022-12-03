@@ -16,19 +16,24 @@
     <div>
     <ion-list>
       <div *ngFor="let item of infos">
-
-        <ion-item  (click)="validate(item)" *ngIf="item.role=='agent'">
+     <!--    *ngIf="item.role=='agent'" -->
+        <ion-item  (click)="validate(item)" >
           <ion-avatar item-start>
             <img [src]="item.photoURL || '/assets/images/avatar.png'">
           </ion-avatar>
           <ion-label>
-            <h2 style="padding-left:5px;">{{item.displayName}}</h2>
+            <h2 style="padding-left:5px;">
+              {{item.displayName}}
+              <ion-badge *ngIf="item.role=='admin'" color="danger" style="margin-left: 5px;"  slot="start">{{item.role}}</ion-badge>
+              <ion-badge *ngIf="item.role=='agent'" color="tertiary" style="margin-left: 5px;"  slot="start">{{item.role}}</ion-badge>
+              <ion-badge *ngIf="item.role=='client'" color="success" style="margin-left: 5px;"  slot="start">{{item.role}}</ion-badge>
+            </h2>
             <p style="padding-left:5px;">{{item.email}}</p>
             <p style="padding-left:5px;">{{item.phone}}</p>
            <!--  <p style="padding-left:5px;">Rôle : {{item.role}}</p> -->
           </ion-label>
-          <ion-badge color="secondary" *ngIf="item.status==true" slot="end">Validé</ion-badge>
-          <ion-badge color="primary" *ngIf="item.status==false" slot="end">En attente de validation</ion-badge>
+          <ion-badge color="secondary" *ngIf="item.role=='agent' && item.status==true" slot="end">Validé</ion-badge>
+          <ion-badge color="primary" *ngIf="item.role=='agent' && item.status==false" slot="end">En attente de validation</ion-badge>
         </ion-item>
 
       </div>

@@ -11,7 +11,7 @@
 
 <ion-content [fullscreen]="true">
     <!-- fab placed to the top end -->
-    <ion-fab (click)="create()" vertical="bottom" horizontal="end" slot="fixed" *ngIf="user?.status==true && user?.role=='agent'">
+    <ion-fab (click)="create()" vertical="bottom" horizontal="end" slot="fixed" *ngIf="(user?.status==true && user?.role=='agent') || user?.role=='admin'">
       <ion-fab-button>
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
@@ -55,7 +55,7 @@
           <p>Dec 10, 2019</p>
         </ion-label>
       </ion-item>
-      <img *ngIf="item.photoURL[0]" [src]="item.photoURL[0]" />
+      <img *ngIf="item.photoURL" [src]="item.photoURL" />
       <ion-card-header>
         <ion-card-title>Hotel Panama Garden</ion-card-title>
       </ion-card-header>
@@ -107,7 +107,7 @@
     </ion-item>
 
 
-    <img *ngIf="item.photoURL[0]" class="card-image" (click)="zoomImage(item.photoURL[0])" [src]="item.photoURL[0]" />
+    <img *ngIf="item.photoURL!=''" class="card-image" (click)="zoomImage(item.photoURL)" [src]="item.photoURL" />
     <ion-card-header>
       <ion-card-title class="titre" >{{item.name}}</ion-card-title>
       

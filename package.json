@@ -98,9 +98,7 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "call-number": {},
-      "cordova-plugin-camera": {
-        "ANDROIDX_CORE_VERSION": "1.6.+"
-      },
+      "cordova-plugin-camera": {},
       "cordova-plugin-crop": {},
       "cordova-plugin-inappbrowser": {}
     },

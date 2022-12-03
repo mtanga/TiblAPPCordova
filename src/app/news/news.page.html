@@ -5,7 +5,7 @@
       <ion-back-button class="white" defaultHref="/tabs/tab1"> </ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-icon *ngIf="userInfos.uid==item.user" (click)="editNews()" class="search" color="primary" slot="end"  name="create"></ion-icon>
+      <ion-icon *ngIf="userInfos.role=='admin'" (click)="editNews()" class="search" color="primary" slot="end"  name="create"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -16,6 +16,9 @@
    <!--  <img *ngIf="item.photoURL" [src]="item.photoURL[0].webviewPath" /> -->
     <ion-slides pager="true" [options]="slideOptsOne" #slideWithNav
     (ionSlideDidChange)="SlideDidChange(sliderOne,slideWithNav)">
+    <ion-slide *ngFor="item.photoURL!=''">
+      <img (click)="zoomImage(item.photoURL)" class="card-images" src="{{item.photoURL}}">
+      </ion-slide>
     <ion-slide *ngFor="let s of item.photoURL">
     <img src="{{s}}" (click)="zoomImage(s)">
     </ion-slide>

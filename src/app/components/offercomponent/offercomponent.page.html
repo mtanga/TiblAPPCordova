@@ -8,8 +8,8 @@
   <!-- Mon image ici -->
   <ion-grid>
     <ion-row>
-      <ion-col size="4" *ngFor="let photo of photoService.photos; index as position">
-        <ion-img [src]="photo.webviewPath"  class="thumbail"></ion-img>
+      <ion-col size="4" *ngFor="let photo of images;">
+        <ion-img [src]="photo"  class="thumbail"></ion-img>
       </ion-col>
     </ion-row>
   </ion-grid>

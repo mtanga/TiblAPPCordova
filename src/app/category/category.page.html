@@ -64,7 +64,7 @@
     </ion-item>
 
 
-    <img *ngIf="item.photoURL[0]" class="card-image" [src]="item.photoURL[0]"  (click)="zoomImage(item.photoURL[0])"/>
+    <img *ngIf="item.photoURL!=''" class="card-image" [src]="item.photoURL"  (click)="zoomImage(item.photoURL)"/>
     <ion-card-header>
       <ion-card-title class="titre" >{{item.name}}</ion-card-title>
       

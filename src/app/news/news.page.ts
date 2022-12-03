@@ -126,7 +126,7 @@ editNews() {
       },
       {
         name: "description",
-        type : "text",
+        type : "textarea",
         value: this.item.description,
         handler: () => {
           console.log('Let me think');
@@ -134,6 +134,12 @@ editNews() {
       }
     ],
     buttons: [
+      {
+        text: 'Supprimer',
+        handler: () => {
+          this.deleteNews(this.id);
+        }
+      },
       {
         text: 'Annuler',
         handler: () => {
@@ -150,6 +156,18 @@ editNews() {
   }).then(res => {
     res.present();
   });
+}
+
+
+deleteNews(id){
+  if(confirm("Vous voulez vraiment supprimer cette actualité ?")) {
+    this.newService.delete(id)
+    .then(() => {
+      this.presentToast("Article supprimé");
+      this.router.navigate(['/tabs/tab2']);
+    })
+    .catch(err => console.log(err));
+  }
 }
 
 updateComment(data){

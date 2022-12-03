@@ -76,6 +76,7 @@ export class OffersPage implements OnInit {
       )
     ).subscribe(data => {
       this.offers = data;
+      console.log("item", data)
       this.goalList = data;
       this.loadedGoalList = data;
       this.ionLoader.hideLoader();

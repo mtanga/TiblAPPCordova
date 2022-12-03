@@ -64,14 +64,13 @@ export class OfferService {
     return this.Ref.doc(id).ref.get();
   }
 
-  create(offer: Offer): any {     
-     // console.log("images ici", this.images)
+  create(offer: Offer) {  
+   // console.log("mes images", images)   
       offer.dateCreated = new Date();
       offer.userCreated = JSON.parse(localStorage.getItem('user')!).uid;
       offer.userImage = JSON.parse(localStorage.getItem('user')!).photoURL || "";
       offer.userName = JSON.parse(localStorage.getItem('user')!).displayName || "";
       offer.visible = false;
-      offer.photoURL = [];
       offer.comments = [];
       offer.likes =  [];
       offer.shares = 0;
