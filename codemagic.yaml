@@ -25,3 +25,5 @@ scripts:
           --no-interactive \
           --prod \
           --device 
+  artifacts:
+    - platforms/android/app/build/outputs/**/*.apk
